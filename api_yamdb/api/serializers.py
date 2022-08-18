@@ -1,8 +1,6 @@
 from django.contrib.auth import get_user_model
-
 from rest_framework import serializers
 from rest_framework.relations import SlugRelatedField
-
 from reviews.models import Category, Comment, Genre, Review, Title
 
 User = get_user_model()
@@ -100,7 +98,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class GenreSerializer(serializers.ModelSerializer):
-    """Serializer for Category model"""
+    """Serializer for Category model."""
 
     class Meta:
         model = Genre
@@ -109,6 +107,7 @@ class GenreSerializer(serializers.ModelSerializer):
 
 class TitlePostSerializer(serializers.ModelSerializer):
     """Serializer for POST requests of the Title model."""
+
     category = serializers.SlugRelatedField(
         slug_field='slug',
         queryset=Category.objects.all(),
@@ -127,6 +126,7 @@ class TitlePostSerializer(serializers.ModelSerializer):
 
 class TitleGetSerializer(serializers.ModelSerializer):
     """Serializer for GET requests of the Title model."""
+
     genre = GenreSerializer(many=True)
     category = CategorySerializer()
     rating = serializers.IntegerField()

@@ -30,6 +30,7 @@ class User(AbstractUser):
 
     class Meta:
         """Additionally for User model."""
+
         ordering = ('id',)
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
@@ -184,6 +185,7 @@ class Comment(models.Model):
 
     class Meta:
         """Additionally for Comment model."""
+
         ordering = ('-pub_date',)
 
     def __str__(self):

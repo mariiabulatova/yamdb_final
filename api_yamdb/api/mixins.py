@@ -7,4 +7,5 @@ class MyMixinViewSet(
         mixins.DestroyModelMixin,
         viewsets.GenericViewSet):
     """Mixin for Category and Genre classes."""
+
     pass

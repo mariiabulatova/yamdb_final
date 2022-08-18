@@ -10,6 +10,7 @@ admin.site.register(User)
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     """Registering model Category in the admin panel."""
+
     list_display = ('pk', 'name', 'slug',)
     search_fields = ('name',)
     list_filter = ('slug',)
@@ -19,6 +20,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
     """Registering model Genre in the admin panel."""
+
     list_display = ('pk', 'name', 'slug',)
     search_fields = ('name',)
     list_filter = ('slug',)
@@ -28,6 +30,7 @@ class GenreAdmin(admin.ModelAdmin):
 @admin.register(Title)
 class TitleAdmin(admin.ModelAdmin):
     """Registering model Title in the admin panel."""
+
     list_display = ('pk', 'name', 'year', 'category',)
     search_fields = ('name',)
     list_filter = ('name',)

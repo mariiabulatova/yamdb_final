@@ -2,7 +2,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.db.models import Avg
-
 from django_filters.rest_framework import (CharFilter, DjangoFilterBackend,
                                            FilterSet)
 from rest_framework import filters, permissions, status, viewsets
@@ -13,9 +12,9 @@ from rest_framework.permissions import (AllowAny, IsAuthenticated,
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+from reviews.models import Category, Genre, Review, Title
 
 from api_yamdb import settings
-from reviews.models import Category, Genre, Review, Title
 
 from .mixins import MyMixinViewSet
 from .permissions import (AdminOnly, AdminOrReadOnly,
@@ -26,7 +25,6 @@ from .serializers import (CategorySerializer, CommentSerializer,
                           SignUpSerializer, TitleGetSerializer,
                           TitlePostSerializer, TokenSerializer,
                           UserByAdminSerializer)
-
 
 User = get_user_model()
 
@@ -120,8 +118,9 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         title = get_object_or_404(Title, id=self.kwargs.get('title_id'))
-        queryset = Review.objects.filter(title=title)
-        return queryset
+        # queryset = Review.objects.filter(title=title)
+        # return queryset
+        return Review.objects.filter(title=title)
 
     def perform_create(self, serializer):
         title_id = self.kwargs.get('title_id')
@@ -138,8 +137,9 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         review = get_object_or_404(Review, id=self.kwargs.get('review_id'))
-        queryset = review.comments.all()
-        return queryset
+        # queryset = review.comments.all()
+        # return queryset
+        return review.comments.all()
 
     def perform_create(self, serializer):
         review_id = self.kwargs.get('review_id')
@@ -179,7 +179,7 @@ class TitleViewSet(viewsets.ModelViewSet):
 
 
 class CategoryViewSet(MyMixinViewSet):
-    """ViewSet for Category model"""
+    """ViewSet for Category model."""
 
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
@@ -192,7 +192,7 @@ class CategoryViewSet(MyMixinViewSet):
 
 
 class GenreViewSet(MyMixinViewSet):
-    """ViewSet for Genre model"""
+    """ViewSet for Genre model."""
 
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
