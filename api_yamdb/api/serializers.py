@@ -16,7 +16,6 @@ def validate_not_me(value):
 
 class SignUpSerializer(serializers.ModelSerializer):
     """Serializer for User model - new user registration."""
-
     username = serializers.CharField(validators=[validate_not_me])
 
     class Meta:
@@ -26,14 +25,12 @@ class SignUpSerializer(serializers.ModelSerializer):
 
 class TokenSerializer(serializers.Serializer):
     """Serializer for User model - JWT token."""
-
     username = serializers.CharField(max_length=150, required=True)
     confirmation_code = serializers.CharField(required=True)
 
 
 class UserByAdminSerializer(serializers.ModelSerializer):
     """Serializer for User model - new user by admin."""
-
     class Meta:
         model = User
         fields = (
@@ -53,7 +50,6 @@ class MeSerializer(serializers.ModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     """Serializer for Review model."""
-
     author = SlugRelatedField(slug_field='username',
                               read_only=True,
                               default=serializers.CurrentUserDefault()
@@ -79,7 +75,6 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     """Serializer for Comment model."""
-
     author = serializers.SlugRelatedField(
         read_only=True, slug_field='username'
     )
@@ -91,7 +86,6 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
     """Serializer for Category model."""
-
     class Meta:
         model = Category
         exclude = ('id',)
@@ -99,7 +93,6 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class GenreSerializer(serializers.ModelSerializer):
     """Serializer for Category model."""
-
     class Meta:
         model = Genre
         exclude = ('id',)
@@ -107,7 +100,6 @@ class GenreSerializer(serializers.ModelSerializer):
 
 class TitlePostSerializer(serializers.ModelSerializer):
     """Serializer for POST requests of the Title model."""
-
     category = serializers.SlugRelatedField(
         slug_field='slug',
         queryset=Category.objects.all(),
@@ -126,7 +118,6 @@ class TitlePostSerializer(serializers.ModelSerializer):
 
 class TitleGetSerializer(serializers.ModelSerializer):
     """Serializer for GET requests of the Title model."""
-
     genre = GenreSerializer(many=True)
     category = CategorySerializer()
     rating = serializers.IntegerField()
