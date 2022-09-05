@@ -19,8 +19,8 @@ services:
   web:
     image: mariiabulatova/api_yamdb
     build:
-      context: ..
-      dockerfile: api_yamdb/Dockerfile
+      context: ../api_yamdb
+      dockerfile: Dockerfile
     restart: always
 #    ports:
 #      - "8000:8000" закрываем порт, чтобы все шло через nginx
