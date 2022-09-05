@@ -1,6 +1,5 @@
 FROM python:3.7-slim
 
-# RUN mkdir -p /app
 WORKDIR /app
 
 COPY requirements.txt /app
@@ -13,5 +12,3 @@ LABEL author='mariia.bulatova@yandex.ru' version=2 broken_keyboards=100600
 
 ENV DATABASE_NAME postgres
 ENV DATABASE_PORT 5432
-
-
