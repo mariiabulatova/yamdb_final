@@ -58,7 +58,7 @@ jobs:
           push: true
           tags: ${{ secrets.USERNAME_DOCKERHUB }}/api_yamdb:latest
 
-  # из теории
+
   deploy:
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
